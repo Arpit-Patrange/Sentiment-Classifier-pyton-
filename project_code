@@ -1,1 +1,9 @@
 
+punctuation_chars = ["'", '"', ",", ".", "!", ":", ";", '#', '@']
+
+def strip_punctuation(strWord):
+    for charPunct in punctuation_chars:
+        strWord = strWord.replace(charPunct, "")
+    return strWord
+    
+    
