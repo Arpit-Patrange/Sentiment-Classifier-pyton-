@@ -1,12 +1,20 @@
 
 punctuation_chars = ["'", '"', ",", ".", "!", ":", ";", '#', '@']
+
+#escaping the punctuation marks from the words in the string 
+def strip_punctuation(strWord):
+    for charPunct in punctuation_chars:
+        strWord = strWord.replace(charPunct, "")
+    return strWord
+    
 # list of positive words to use
 positive_words = []
 with open("positive_words.txt") as pos_f:
     for lin in pos_f:
         if lin[0] != ';' and lin[0] != '\n':
             positive_words.append(lin.strip())
-
+            
+# to know no of positive words in a string.
 def get_pos(strSentences):
     strSentences = strip_punctuation(strSentences)
     listStrSentences= strSentences.split()
@@ -19,7 +27,23 @@ def get_pos(strSentences):
     return count           
 
             
-def strip_punctuation(strWord):
-    for charPunct in punctuation_chars:
-        strWord = strWord.replace(charPunct, "")
-    return strWord
+#list of negative words
+negative_words = []
+with open("negative_words.txt") as pos_f:
+    for lin in pos_f:
+        if lin[0] != ';' and lin[0] != '\n':
+            negative_words.append(lin.strip())
+            
+# to know no of negative words in a string 
+
+def get_neg(neg_str1):
+    neg_str = neg_str1.lower()
+    neg_str = strip_punctuation(neg_str)
+    new_neg_str = neg_str.split()
+    
+    counter = 0 
+    for word in new_neg_str:
+        for element in negative_words:
+            if word == element:
+                counter = counter +1
+    return counter
